@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\DocScheduleService\DTO\Response\" />
     <Folder Include="NewFolder\" />
   </ItemGroup>
 
