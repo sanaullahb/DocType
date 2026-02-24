@@ -1,7 +1,10 @@
-﻿namespace DocType.DTO.Response
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+
+namespace DocType.DTO.Response
 {
     public class ResponseProfile
     {
+        public string? Id { get; set; } 
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }

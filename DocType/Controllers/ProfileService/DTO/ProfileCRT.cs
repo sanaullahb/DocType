@@ -1,6 +1,9 @@
 ﻿using DocType.DTO.Requests;
+using DocType.DTO.Response;
 using DocType.Generic;
 using DocType.Models;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 
 namespace DocType.DTO
 {
@@ -31,7 +34,25 @@ namespace DocType.DTO
                 UpdatedBy = userId,
             };
         }
-
+        public static  ResponseProfile ToResponse(this Profile pro, string userId)
+        {
+            return new ResponseProfile()
+            {
+                Id = pro.Id,
+               Address = pro.Address,   
+               City = pro.City, 
+               Country = pro.Country,   
+               State = pro.State,   
+               Gender = pro.Gender, 
+               ZipCode = pro.ZipCode,   
+               Cnic  = pro.Cnic,    
+               Email = pro.Email,   
+               PhoneNumber = pro.PhoneNumber,   
+               FirstName    = pro.FirstName,
+               LastName= pro.LastName,
+              
+            };
+        }
 
 
     }
