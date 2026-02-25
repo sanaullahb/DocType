@@ -13,6 +13,7 @@
         public string? Country { get; set; }
         public string? Gender { get; set; }
         public string? Cnic { get; set; }
+        public int? HomeVisitFees { get; set; }  
         public string? ConsultationFee { get; set; }
         public string? isAvailable { get; set; }
     }

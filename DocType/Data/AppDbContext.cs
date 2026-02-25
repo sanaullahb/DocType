@@ -31,5 +31,6 @@ namespace DocType.Data
                 .IsUnique();
         }
         public DbSet<Profile> Profile { get; set; }
+        public DbSet<Doc> Doc { get; set; }
     }
 }
