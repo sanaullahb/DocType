@@ -1,5 +1,6 @@
 ﻿using DocType.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 using System.Xml.Linq;
 
 namespace DocType.Data
@@ -12,7 +13,22 @@ namespace DocType.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // EF Core now understands Id from Base<int> as PK
+
+            modelBuilder.Entity<Doc>()
+                .HasMany(d => d.Appointments)
+                .WithOne(a => a.Doctor)
+                .HasForeignKey(a => a.DoctorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Patient>()
+                .HasMany(p => p.Appointments)
+                .WithOne(a => a.Patient)
+                .HasForeignKey(a => a.PatientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<DocTimeSlot>()
+                .HasIndex(s => new { s.DoctorId, s.Date, s.Time })
+                .IsUnique();
         }
         public DbSet<Profile> Profile { get; set; }
     }
