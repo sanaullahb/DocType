@@ -34,5 +34,6 @@ namespace DocType.Data
         public DbSet<Doc> Doc { get; set; }
         public DbSet<DocTimeSlot> DocTimeSlot { get; set; } 
         public DbSet<DocAvailability> DocAvailabilities { get; set; }
+        public DbSet<Patient> Patients { get; set; }
     }
 }
