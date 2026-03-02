@@ -32,5 +32,7 @@ namespace DocType.Data
         }
         public DbSet<Profile> Profile { get; set; }
         public DbSet<Doc> Doc { get; set; }
+        public DbSet<DocTimeSlot> DocTimeSlot { get; set; } 
+        public DbSet<DocAvailability> DocAvailabilities { get; set; }
     }
 }

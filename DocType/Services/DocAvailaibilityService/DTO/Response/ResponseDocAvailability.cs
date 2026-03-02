@@ -1,20 +1,14 @@
-﻿using System.Numerics;
-
-namespace DocType.Models
+﻿namespace DocType.Services.DocAvailaibilityService.DTO.Response
 {
-    public class DocAvailability : Base<string>
+    public class ResponseDocAvailability
     {
-      
-
-        public string DoctorId { get; set; }
-        public Doc Doc { get; set; }
-
+        public string Id { get; set; }
+        public string DocId { get; set; }   
         public DateOnly AvailableDate { get; set; }
 
         public TimeOnly StartTime { get; set; }
         public TimeOnly EndTime { get; set; }
 
         public int SlotDurationMinutes { get; set; } = 30;
-
     }
 }

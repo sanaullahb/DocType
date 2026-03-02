@@ -22,5 +22,10 @@
             Paid = 2,
             Refunded = 3
         }
-    
+    public enum SlotType
+    {
+        ClinicVisit,
+        OnlineConsultation,
+        HomeVisit
+    }
 }
