@@ -1,14 +1,14 @@
-﻿namespace DocType.Models { 
-
-    public class DoctorSchedule : Base<string>
+﻿namespace DocType.Services.DocScheduleService.DTO.Response
+{
+    public class ResponseDoctorSchedule
     {
+        public string Id { get; set; }
+
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
         public string Title { get; set; }
         public string Description { get; set; }
-
-        // Example: "Online", "HomeVisit", "Clinic", "Leave"
         public string Type { get; set; }
 
         public string UserId { get; set; }
