@@ -2,7 +2,7 @@
 {
     public class RequestAddDocAvailability
     {
-        public string Id { get; set; }  
+
         public string DocId { get; set; }   
         public DateOnly AvailableDate { get; set; }
 

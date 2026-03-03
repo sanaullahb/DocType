@@ -16,9 +16,9 @@
         public string? ConsultationFee { get; set; }
         public int? HomeVisitFees { get; set; } 
         public string? isAvailable { get; set; }
-        public ICollection<DocAvailability> Availabilities { get; set; }
-        public ICollection<DocTimeSlot> TimeSlots { get; set; }
-        public ICollection<Appointment> Appointments { get; set; }
+        public ICollection<DocAvailability>? Availabilities { get; set; }
+        public ICollection<DocTimeSlot>? TimeSlots { get; set; }
+        public ICollection<Appointment>? Appointments { get; set; }
 
     }
 }

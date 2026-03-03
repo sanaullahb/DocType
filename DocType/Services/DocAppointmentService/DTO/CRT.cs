@@ -11,6 +11,8 @@ public static class AppointmentMapping
         decimal doctorFee,
         decimal platformFee)
     {
+        var date = DateOnly.Parse(req.AppointmentDate);
+        var time = TimeOnly.Parse(req.AppointmentTime);
         return new Appointment
         {
             Id = Guid.NewGuid().ToString(),
@@ -18,8 +20,8 @@ public static class AppointmentMapping
             DoctorId = req.DoctorId,
             PatientId = req.PatientId,
 
-            AppointmentDate = req.AppointmentDate,
-            AppointmentTime = req.AppointmentTime,
+            AppointmentDate = date,
+            AppointmentTime = time,
 
             AppointmentType = req.AppointmentType,
             Status = AppointmentStatus.Pending,

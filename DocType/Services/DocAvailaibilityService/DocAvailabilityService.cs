@@ -37,7 +37,7 @@ namespace DocType.Services.DocAvailaibilityService
 
         public async Task<bool> UpdateDocAvailabilityAsync(RequestUpdateDocAvailability request, string userId, CancellationToken cancellationToken)
         {
-            var existing = await _context.DocAvailabilities.FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
+            var existing = await _context.DocAvailabilities.FirstOrDefaultAsync(p => p.Id == request.ID, cancellationToken);
             if (existing == null) return false;
 
             existing.SlotDurationMinutes = request.SlotDurationMinutes;

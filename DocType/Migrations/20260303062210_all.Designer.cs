@@ -3,6 +3,7 @@ using System;
 using DocType.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DocType.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260303062210_all")]
+    partial class all
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,6 +184,10 @@ namespace DocType.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("DocId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("DoctorId")
                         .IsRequired()
                         .HasColumnType("text");
@@ -209,7 +216,7 @@ namespace DocType.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("DocId");
 
                     b.ToTable("DocAvailabilities");
                 });
@@ -231,6 +238,10 @@ namespace DocType.Migrations
 
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
+
+                    b.Property<string>("DocId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("DoctorId")
                         .IsRequired()
@@ -258,6 +269,8 @@ namespace DocType.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AvailabilityId");
+
+                    b.HasIndex("DocId");
 
                     b.HasIndex("DoctorId", "Date", "Time")
                         .IsUnique();
@@ -449,7 +462,7 @@ namespace DocType.Migrations
                 {
                     b.HasOne("DocType.Models.Doc", "Doc")
                         .WithMany("Availabilities")
-                        .HasForeignKey("DoctorId")
+                        .HasForeignKey("DocId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -460,12 +473,11 @@ namespace DocType.Migrations
                 {
                     b.HasOne("DocType.Models.DocAvailability", "Availability")
                         .WithMany()
-                        .HasForeignKey("AvailabilityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AvailabilityId");
 
                     b.HasOne("DocType.Models.Doc", "Doc")
                         .WithMany("TimeSlots")
-                        .HasForeignKey("DoctorId")
+                        .HasForeignKey("DocId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

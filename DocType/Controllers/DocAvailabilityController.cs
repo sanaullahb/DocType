@@ -108,7 +108,7 @@ namespace DocType.Controllers.DocAvailabilityController
 
             try
             {
-                request.Id = id; // ensure route id is used
+              // ensure route id is used
 
                 var result = await _docAvailabilityService
                     .UpdateDocAvailabilityAsync(request, "System", cancellationToken);

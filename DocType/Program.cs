@@ -1,18 +1,35 @@
 
+using DocType.Controllers.TImeManagementService;
 using DocType.Data;
 using DocType.Services;
+using DocType.Services.DocAppointmentService;
+using DocType.Services.DocAvailaibilityService;
+using DocType.Services.DocTimeSlotService;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
+builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IDocTimeSlotService, DocTimeSlotService>();
+builder.Services.AddScoped<IDocAvailabilityService, DocAvailabilityService>();
+builder.Services.AddScoped<IDocService, DocService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

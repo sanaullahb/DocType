@@ -18,7 +18,7 @@ namespace DocType.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(RequestAddAppointment request)
         {
-            var userId = User.Identity.Name;
+            var userId = "system";
 
             var result = await _service.CreateAsync(request, userId);
             return Ok(result);

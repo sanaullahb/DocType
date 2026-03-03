@@ -7,11 +7,15 @@ namespace DocType.Services.DocAppointmentService.DTO.Request
         public string DoctorId { get; set; }
         public string PatientId { get; set; }
 
-        public DateOnly AppointmentDate { get; set; }
-        public TimeOnly AppointmentTime { get; set; }
+        //public DateOnly AppointmentDate { get; set; }
+        //public TimeOnly AppointmentTime { get; set; }
+        public string AppointmentDate { get; set; }
+
+        // string instead of TimeOnly
+        public string AppointmentTime { get; set; }
 
         public AppointmentType AppointmentType { get; set; }
-
+        public string? HomeAddress { get; set; }
      
     }
     public class RequestUpdateAppointmentStatus

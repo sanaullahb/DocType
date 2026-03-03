@@ -36,6 +36,8 @@ namespace DocType.Controllers.TImeManagementService.DTO
                 CreatedDate = now,
                 IsArchived = false,
                 UpdatedBy = userId,
+                HomeVisitFees = request.HomeVisitFees,
+                
             };
         }
         public static ResponseDocInformation ToResponse(this Doc doc)

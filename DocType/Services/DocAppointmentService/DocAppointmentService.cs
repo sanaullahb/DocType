@@ -1,5 +1,6 @@
 ﻿using DocType.Data;
 using DocType.Enums;
+using DocType.Models;
 using DocType.Services.DocAppointmentService.DTO.Request;
 using DocType.Services.DocAppointmentService.DTO.Response;
 
@@ -14,32 +15,53 @@ namespace DocType.Services.DocAppointmentService
             _context = context;
         }
 
-        public async Task<ResponseAppointment> CreateAsync(
-            RequestAddAppointment request,
-            string userId)
+        public async Task<ResponseAppointment> CreateAsync(RequestAddAppointment request, string userId)
         {
-            // Prevent double booking
-            var exists =  _context.Appointments.Any(x =>
+            var date = DateOnly.Parse(request.AppointmentDate);
+            var time = TimeOnly.Parse(request.AppointmentTime);
+
+            var exists = _context.Appointments.Any(x =>
                 x.DoctorId == request.DoctorId &&
-                x.AppointmentDate == request.AppointmentDate &&
-                x.AppointmentTime == request.AppointmentTime &&
+                x.AppointmentDate == date &&
+                x.AppointmentTime == time &&
                 x.Status != AppointmentStatus.Cancelled);
 
             if (exists)
                 throw new Exception("Time slot already booked");
 
-            // Example fees (later fetch from doctor profile)
             decimal doctorFee = 2000;
             decimal platformFee = 200;
 
-            var entity = request.ToDomain(userId, doctorFee, platformFee);
+            var entity = new Appointment
+            {
+                Id = Guid.NewGuid().ToString(),
+
+                DoctorId = request.DoctorId,
+                PatientId = request.PatientId,
+                AppointmentDate = date,
+                AppointmentTime = time,
+                AppointmentType = request.AppointmentType,
+                Status = AppointmentStatus.Pending,
+                DoctorFee = doctorFee,
+                PlatformFee = platformFee,
+                TotalAmount = doctorFee + platformFee,
+                PaymentStatus = PaymentStatus.Unpaid,
+                HomeAddress = request.HomeAddress,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedBy = userId,
+                CreatedBy = userId,
+               
+                CreatedDate = DateTime.UtcNow,
+                UpdatedDate = DateTime.UtcNow,
+                IsActive = true,
+                IsArchived = false
+            };
 
             await _context.Appointments.AddAsync(entity);
             await _context.SaveChangesAsync();
 
             return entity.ToResponse();
         }
-
         public async Task<ResponseAppointment> GetByIdAsync(string id)
         {
             var entity =  _context.Appointments

@@ -1,4 +1,5 @@
-﻿using DocType.Models;
+﻿using DocType.Generic;
+using DocType.Models;
 using DocType.Services.DocAvailaibilityService.DTO.Request;
 using DocType.Services.DocAvailaibilityService.DTO.Response;
 using System.Runtime.CompilerServices;
@@ -11,7 +12,7 @@ namespace DocType.Services.DocAvailaibilityService.DTO
 
             return new DocAvailability()
             {
-                Id = obj.Id,    
+                Id = NanoId.Generate(),    
                 DoctorId = obj.DocId,
                 SlotDurationMinutes = obj.SlotDurationMinutes,
                 IsActive = true,
